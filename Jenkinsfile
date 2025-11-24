@@ -10,32 +10,25 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
-                echo "Running build step..."
-                sh 'echo "Build step completed!"'
+                echo "Building Docker image..."
+                sh 'docker build -t node-docker-app .'
             }
         }
 
-        stage('Test') {
+        stage('Tag Docker Image') {
             steps {
-                echo "Running tests..."
-                sh 'echo "Tests completed!"'
+                sh 'docker tag node-docker-app pruthvi20/node-docker-app:latest'
             }
         }
 
-        stage('Package') {
+        /*stage('Push to Docker Hub') {
             steps {
-                echo "Packaging application..."
-                sh 'echo "Package step completed!"'
+                echo "Pushing image to Docker Hub..."
+                sh 'docker push YOUR_DOCKERHUB_USERNAME/node-docker-app:latest'
             }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo "Deploying application..."
-                sh 'echo "Deployment step completed!"'
-            }
-        }
+        }*/
     }
 }
+    
