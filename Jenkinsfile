@@ -19,7 +19,7 @@ pipeline {
 
         stage('Tag Docker Image') {
             steps {
-                bat 'docker tag node-docker-app pruthvi20/node-docker-app:latest'
+                bat 'docker tag node-docker-app pruthviraj438/node-docker-app:latest'
             }
         }
 
