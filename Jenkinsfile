@@ -13,22 +13,21 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo "Building Docker image..."
-                sh 'docker build -t node-docker-app .'
+                bat 'docker build -t node-docker-app .'
             }
         }
 
         stage('Tag Docker Image') {
             steps {
-                sh 'docker tag node-docker-app pruthvi20/node-docker-app:latest'
+                bat 'docker tag node-docker-app pruthvi20/node-docker-app:latest'
             }
         }
 
         stage('Push to Docker Hub') {
             steps {
                 echo "Pushing image to Docker Hub..."
-                sh 'docker push pruthviraj438/node-docker-app:latest'
+                bat 'docker push pruthviraj438/node-docker-app:latest'
             }
         }
     }
 }
-    
