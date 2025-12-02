@@ -1,32 +1,47 @@
 pipeline {
     agent any
 
+    environment {
+        DOCKERHUB_CREDS = credentials('dockerhub')
+        IMAGE_NAME = "node-docker-app"
+        DOCKER_USER = "pruthviraj438"
+    }
+
     stages {
 
         stage('Checkout Code') {
             steps {
-                echo "Pulling code from GitHub..."
                 checkout scm
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                echo "Building Docker image..."
                 bat 'docker build -t node-docker-app .'
+            }
+        }
+
+        stage('Docker Login') {
+            steps {
+                bat """
+                docker login -u %DOCKERHUB_CREDS_USR% -p %DOCKERHUB_CREDS_PSW%
+                """
             }
         }
 
         stage('Tag Docker Image') {
             steps {
-                bat 'docker tag node-docker-app pruthviraj438/node-docker-app:latest'
+                bat """
+                docker tag node-docker-app %DOCKER_USER%/%IMAGE_NAME%:latest
+                """
             }
         }
 
         stage('Push to Docker Hub') {
             steps {
-                echo "Pushing image to Docker Hub..."
-                bat 'docker push pruthviraj438/node-docker-app:latest'
+                bat """
+                docker push %DOCKER_USER%/%IMAGE_NAME%:latest
+                """
             }
         }
     }
