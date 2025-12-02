@@ -23,12 +23,12 @@ pipeline {
             }
         }
 
-        /*stage('Push to Docker Hub') {
+        stage('Push to Docker Hub') {
             steps {
                 echo "Pushing image to Docker Hub..."
-                sh 'docker push YOUR_DOCKERHUB_USERNAME/node-docker-app:latest'
+                sh 'docker push pruthviraj438/node-docker-app:latest'
             }
-        }*/
+        }
     }
 }
     
