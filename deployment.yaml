@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: git-docker-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: git-docker
+  template:
+    metadata:
+      labels:
+        app: git-docker
+    spec:
+      containers:
+      - name: git-docker
+        image: pruthviraj438/git-docker:latest
+        ports:
+        - containerPort: 3000
+      imagePullSecrets:
+       - name: docker-secret
