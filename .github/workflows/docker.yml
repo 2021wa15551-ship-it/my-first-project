@@ -19,7 +19,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build Image
-      run: docker build -t ${{ secrets.DOCKER_USERNAME }}/git-docker:latest .
+      run: docker build -t ${{ secrets.DOCKER_USERNAME }}/git-docker:v1 .
 
     - name: Push Image
-      run: docker push ${{ secrets.DOCKER_USERNAME }}/git-docker:latest
+      run: docker push ${{ secrets.DOCKER_USERNAME }}/git-docker:v1
